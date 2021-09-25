@@ -1,7 +1,9 @@
 import tkinter as tk
 import pyautogui as pag
-import keyboard
 import time
+import json
+
+key = json.load(open("key.json","r",encoding='utf-8'))
 class Test(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
@@ -14,15 +16,15 @@ class Test(tk.Tk):
         self.rect = None
         start_x,start_y =None,None
         self.canvas.pack()
-        self.bind('<F2>',self.quit)
-        self.bind('<F5>',self.screen)
+        self.bind("<{}>".format(key['exit']),self.quit)
+        self.bind("<{}>".format(key['print']),self.screen)
         self.mainloop()
     def on_button_press(self, event):
         # save mouse drag start position
         self.canvas.delete('all')
         self.start_x = event.x
         self.start_y = event.y
-        self.rect = self.canvas.create_rectangle(0,0,0,0,outline="blue",fill='yellow')          # 畫矩形正方形
+        self.rect = self.canvas.create_rectangle(0,0,0,0,outline="blue",fill="#4169E1")          # 畫矩形正方形
         # print('x',self.start_x,self.start_y)
     def change(self,event):
         self.curX, self.curY = (event.x, event.y)
@@ -30,7 +32,7 @@ class Test(tk.Tk):
         # print(self.curX,'y',self.curY)
     def on_button_release(self,event):
         pass
-    def quit(self):
+    def quit(self,event):
         self.destroy()
     def quit_key(self,event):
         self.canvas.destroy()
