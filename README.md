@@ -1,4 +1,4 @@
-# mouse_print
+# mouse_screenshot
 簡易截圖工具
 可以自行設定按鍵操作
 ## 影片網址
